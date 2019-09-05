@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Xurui(Andy) Zhang">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <script>
+        function validation(){
+            var dob = document.forms["registrationForm"]["dateOfBirth"];
+            var password = document.forms["registrationForm"]["password"];
+            var passwordConfrm = document.forms["registrationForm"]["passwordConfrm"];
+
+            //age check, need to be at least 18 years old to register
+            dob = String(dob.value).replace(/\D/g,'');              //convert to string and strip of the '-'
+            var birthYear = Number(dob.substring(0, 4));
+            var birthMonth = Number(dob.substring(4, 6)) - 1;
+            var birthDay = Number(dob.substring(6));
+            var current = new Date();
+            var currentYear = current.getFullYear();
+            var currentMonth = current.getMonth();
+            var currentDay = current.getDate();
+            var age = currentYear - birthYear;
+            if (currentMonth < birthMonth || (currentMonth == birthMonth && currentDay < birthDay)){
+                age--;
+            }
+            if (age < 18){
+                window.alert("Only people who are 18 years old or older can register.");
+                return false;
+            }
+
+            //validate password
+            if (password.value != passwordConfrm.value){
+                window.alert("Password did not match!");
+                return false;
+            }
+
+            return true;
+        }
+
+        function getCurrentTimeStamp(){
+            var date = new Date();
+            var timeStamp = date.getTime();
+            document.getElementById("timeStamp").value = timeStamp;
+        }
+
+    </script>
+</head>
+<body>
+<h3>Registration Form</h3>
+<form name="registrationForm" method="get" action="formProcessor.html">
+    <p>Account Name: <input type="text" name="accountName" pattern="^[^0-9][a-zA-Z0-9]*$" title="upper or lower case
+    letters and numbers, may not start with a number" required></p>
+    <p>Email Address: <input type="email" name="emailAddress" required></p>
+    <p>Phone Number: <input type="tel" name="phoneNumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="The format should
+    be xxx-xxx-xxxx" required></p>
+    <p>Date of Birth: <input type="date" name="dateOfBirth" required></p>
+    <p>Zipcode: <input type="text" name="zipcode" pattern="[0-9]{5}" title="should be 5 digits" required></p>
+    <p>Password: <input type="password" name="password" required></p>
+    <p>Password Confirmation: <input type="password" name="passwordConfrm" required></p>
+    <p><input type="hidden" name="timeStamp" id="timeStamp"></p>
+    <p><input type="submit" value="submit" onclick="getCurrentTimeStamp();return validation()">
+        <button type="reset" value="Reset">Clear</button></p>
+</form>
+</body>
+</html>

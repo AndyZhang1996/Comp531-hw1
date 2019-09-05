@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Xurui(Andy) Zhang">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>formProcessor</title>
+    <script>
+        function retrieveInput(){
+            var accountNameKey = decodeURIComponent(location.search.substring(1).split('&')[0]).split("=")[0];
+            var accountNameValue = decodeURIComponent(location.search.substring(1).split('&')[0]).split("=")[1];
+            var emailAddressKey = decodeURIComponent(location.search.substring(1).split('&')[1]).split("=")[0];
+            var emailAddressValue = decodeURIComponent(location.search.substring(1).split('&')[1]).split("=")[1];
+            var phoneNumberKey = decodeURIComponent(location.search.substring(1).split('&')[2]).split("=")[0];
+            var phoneNumberValue = decodeURIComponent(location.search.substring(1).split('&')[2]).split("=")[1];
+            var dateOfBirthKey = decodeURIComponent(location.search.substring(1).split('&')[3]).split("=")[0];
+            var dateOfBirthValue = decodeURIComponent(location.search.substring(1).split('&')[3]).split("=")[1];
+            var zipcodeKey = decodeURIComponent(location.search.substring(1).split('&')[4]).split("=")[0];
+            var zipcodeValue = decodeURIComponent(location.search.substring(1).split('&')[4]).split("=")[1];
+            renderPassword();
+            renderTime();
+
+
+            document.getElementById("accountNameKey").innerHTML = accountNameKey;
+            document.getElementById("accountNameValue").innerHTML = accountNameValue;
+            document.getElementById("emailAddressKey").innerHTML = emailAddressKey;
+            document.getElementById("emailAddressValue").innerHTML = emailAddressValue;
+            document.getElementById("phoneNumberKey").innerHTML = phoneNumberKey;
+            document.getElementById("phoneNumberValue").innerHTML = phoneNumberValue;
+            document.getElementById("dateOfBirthKey").innerHTML = dateOfBirthKey;
+            document.getElementById("dateOfBirthValue").innerHTML = dateOfBirthValue;
+            document.getElementById("zipcodeKey").innerHTML = zipcodeKey;
+            document.getElementById("zipcodeValue").innerHTML = zipcodeValue;
+        }
+
+        function renderPassword(){
+            var passwordKey = decodeURIComponent(location.search.substring(1).split('&')[5]).split("=")[0];
+            var passwordValue = decodeURIComponent(location.search.substring(1).split('&')[5]).split("=")[1];
+            var ast = "*";
+            var renderedPassword = ast.repeat(passwordValue.length);
+
+            document.getElementById("passwordKey").innerHTML = passwordKey;
+            document.getElementById("renderedPassword").innerHTML = renderedPassword;
+        }
+
+        function renderTime(){
+            var timeKey = decodeURIComponent(location.search.substring(1).split('&')[7]).split("=")[0];
+            var timeValue = decodeURIComponent(location.search.substring(1).split('&')[7]).split("=")[1];
+
+            var renderedTime = new Date(Number(timeValue));
+
+            document.getElementById("timeKey").innerHTML = timeKey;
+            document.getElementById("renderedTime").innerHTML = renderedTime;
+        }
+
+    </script>
+</head>
+<body onload="retrieveInput()">
+<h3>formProcessor Form</h3>
+<table border="1">
+    <thead>
+        <tr><th>Key</th><th>Value</th></tr>
+    </thead>
+    <tbody>
+        <tr><td><span id="accountNameKey"></span></td><td><span id="accountNameValue"></span></td></tr>
+        <tr><td><span id="emailAddressKey"></span></td><td><span id="emailAddressValue"></span></td></tr>
+        <tr><td><span id="phoneNumberKey"></span></td><td><span id="phoneNumberValue"></span></td></tr>
+        <tr><td><span id="dateOfBirthKey"></span></td><td><span id="dateOfBirthValue"></span></td></tr>
+        <tr><td><span id="zipcodeKey"></span></td><td><span id="zipcodeValue"></span></td></tr>
+        <tr><td><span id="passwordKey"></span></td><td><span id="renderedPassword"></span></td></tr>
+        <tr><td><span id="timeKey"></span></td><td><span id="renderedTime"></span></td></tr>
+    </tbody>
+</table>
+
+</body>
+</html>
