@@ -30,12 +30,23 @@
             }
 
             //validate password
-            if (password.value != passwordConfrm.value){
-                window.alert("Password did not match!");
-                return false;
-            }
+            // if (password.value != passwordConfrm.value){
+            //     window.alert("Password did not match!");
+            //     return false;
+            // }
 
             return true;
+        }
+
+        function passwordCheck(){
+            var password = document.getElementById("password");
+            var passwordConfrm = document.getElementById("passwordConfrm");
+
+            if (password.value == passwordConfrm.value){
+                passwordConfrm.setCustomValidity("");
+            }else{
+                passwordConfrm.setCustomValidity("Password does not match!");
+            }
         }
 
         function getCurrentTimeStamp(){
@@ -56,10 +67,11 @@
     be xxx-xxx-xxxx" required></p>
     <p>Date of Birth: <input type="date" name="dateOfBirth" required></p>
     <p>Zipcode: <input type="text" name="zipcode" pattern="[0-9]{5}" title="should be 5 digits" required></p>
-    <p>Password: <input type="password" name="password" required></p>
-    <p>Password Confirmation: <input type="password" name="passwordConfrm" required></p>
+    <p>Password: <input type="password" id="password" name="password" required></p>
+    <p>Password Confirmation: <input type="password" id="passwordConfrm"
+                                     name="passwordConfrm" onkeyup="passwordCheck()" required></p>
     <p><input type="hidden" name="timeStamp" id="timeStamp"></p>
-    <p><input type="submit" value="submit" onclick="getCurrentTimeStamp();return validation()">
+    <p><input type="submit" value="submit" onclick="getCurrentTimeStamp(); return validation()">
         <button type="reset" value="Reset">Clear</button></p>
 </form>
 </body>
